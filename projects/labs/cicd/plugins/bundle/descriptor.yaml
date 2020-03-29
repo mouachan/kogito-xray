@@ -1,0 +1,25 @@
+version: entando.org/v1alpha1
+code: training_bundle
+description: This is the training bundle
+
+components:
+  service:
+    image: FIXME
+    ingressPath: /training
+    healthCheckPath: /actuator/health
+    dbms: mysql
+    roles:
+    - name: training-admin
+      code: "training-admin"
+# entando-needle-descriptor-add-roles - Entando blueprint will add roles here
+
+    permissions: []
+
+  widgets:
+# entando-needle-descriptor-add-widgets - Entando blueprint will add widget bundle files here
+
+  pageModels:
+
+  contentTypes:
+
+  contentModels:
