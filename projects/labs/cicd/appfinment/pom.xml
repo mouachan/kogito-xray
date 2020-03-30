@@ -1,0 +1,150 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.redhat.integration</groupId>
+	<artifactId>openidconnect-gateway</artifactId>
+	<version>1.0.0</version>
+
+	<properties>
+		<maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
+
+		<fuse.version>7.3.0.fuse-730058-redhat-00001</fuse.version>
+
+		<!-- The 7 following properties are used by the fabric8 maven plugin only -->
+		<fabric8.build.strategy>s2i</fabric8.build.strategy>
+		<fabric8.mode>openshift</fabric8.mode>
+
+		<image.version>latest</image.version> 				<!-- overriden on CL -->
+		<fabric8.namespace></fabric8.namespace>		<!-- overriden on CL -->
+
+		<springboot.image>openshift/redhat-openjdk18-openshift:1.2</springboot.image>
+		<springboot.service.port>8180</springboot.service.port>
+		<springboot.container.port>8180</springboot.container.port>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>me.snowdrop</groupId>
+				<artifactId>spring-boot-bom</artifactId>
+				<version>2.1.6.Final</version>
+				<!-- <version>2.1.2.Final-redhat-00003</version> -->
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+<!-- 			<dependency> -->
+<!-- 				<groupId>org.keycloak.bom</groupId> -->
+<!-- 				<artifactId>keycloak-adapter-bom</artifactId> -->
+<!-- 				<version>7.0.0.redhat-00002</version> -->
+<!-- 				<type>pom</type> -->
+<!-- 			</dependency> -->
+
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- Specify the repositories containing the plugins used to execute the 
+		build of your application. -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>redhat-ga</id>
+			<name>Red Hat GA Repository</name>
+			<url>https://maven.repository.redhat.com/ga/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.keycloak</groupId>
+			<artifactId>keycloak-spring-boot-starter</artifactId>
+			<version>8.0.1</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-kubernetes-config</artifactId>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<defaultGoal>spring-boot:run</defaultGoal>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jboss.redhat-fuse</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${fuse.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jboss.redhat-fuse</groupId>
+				<artifactId>fabric8-maven-plugin</artifactId>
+				<version>${fuse.version}</version>
+
+				<!-- <groupId>io.fabric8</groupId> -->
+				<!-- <artifactId>fabric8-maven-plugin</artifactId> -->
+				<!-- <version>4.3.1</version> -->
+				<configuration>
+					<images>
+						<image>
+							<name>${fabric8.namespace}/${project.artifactId}:${image.version}</name>
+						</image>
+					</images>
+					<generator>
+						<config>
+							<spring-boot>
+								<webPort>${springboot.container.port}</webPort>
+								<fromMode>istag</fromMode>
+								<from>${springboot.image}</from>
+								<name>${project.artifactId}</name>
+							</spring-boot>
+						</config>
+					</generator>
+				</configuration>
+				<executions>
+					<execution>
+						<id>fabric8</id>
+						<phase>package</phase>
+						<goals>
+							<goal>resource</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
