@@ -1,0 +1,702 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<semantic:definitions xmlns:semantic="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="http://www.trisotech.com/definitions/_09d0a20e-42a4-41d0-828c-11f8a2815f99" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:drools="http://www.drools.org/kie/dmn/1.2" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rss="http://purl.org/rss/2.0/" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_09d0a20e-42a4-41d0-828c-11f8a2815f99" name="notation" expressionLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="http://www.trisotech.com/definitions/_09d0a20e-42a4-41d0-828c-11f8a2815f99">
+  <semantic:extensionElements/>
+  <semantic:itemDefinition id="_11E9BD75-1147-467E-96A7-238612ED4C61" name="ContrePartie" isCollection="false">
+    <semantic:itemComponent id="_4aadaca2-7050-45f5-8106-f76e1f610b36" name="DecoupageSectoriel" isCollection="false">
+      <semantic:typeRef>string</semantic:typeRef>
+    </semantic:itemComponent>
+    <semantic:itemComponent id="_accacb42-dc06-4896-a865-d9566de522ac" name="TypeAiguillage" isCollection="false">
+      <semantic:typeRef>string</semantic:typeRef>
+    </semantic:itemComponent>
+  </semantic:itemDefinition>
+  <semantic:itemDefinition id="_856052D4-9ECF-40EE-BB2D-433E14EEB5ED" name="Variable" isCollection="true">
+    <semantic:itemComponent id="_2489c863-930f-49f1-a6fa-ebca7f174259" name="type" isCollection="false">
+      <semantic:typeRef>string</semantic:typeRef>
+    </semantic:itemComponent>
+    <semantic:itemComponent id="_db70e853-eab2-4729-a7c4-66d4e953688e" name="valeur" isCollection="false">
+      <semantic:typeRef>number</semantic:typeRef>
+    </semantic:itemComponent>
+  </semantic:itemDefinition>
+  <semantic:itemDefinition id="_84378930-214A-4121-9D36-091EAA1B7EAC" name="tScore" isCollection="false">
+    <semantic:typeRef>number</semantic:typeRef>
+  </semantic:itemDefinition>
+  <semantic:businessKnowledgeModel id="_61b7e2a2-712a-4d97-9638-5c2fcd8849f2" name="Score">
+    <semantic:extensionElements/>
+    <semantic:variable id="_9429d3d8-2d87-40f0-aff6-bb7ad4819a59" name="Score" typeRef="Any"/>
+    <semantic:encapsulatedLogic id="_703469de-1a20-4bb4-a886-09310e930aa5" typeRef="Any" kind="FEEL">
+      <semantic:formalParameter id="_38601649-d663-4227-ab73-6727dcf42862" name="CP" typeRef="ContrePartie"/>
+      <semantic:formalParameter id="_af1cb999-a83d-4705-b00e-5969a57f2b16" name="Var" typeRef="Variable"/>
+      <semantic:context id="_a53e8725-9957-4180-933d-a9d33f691e1a" typeRef="Any">
+        <semantic:contextEntry>
+          <semantic:variable id="_18037119-4d1e-455e-bb24-1240418a0b70" name="Score" typeRef="number"/>
+          <semantic:decisionTable id="_247b4a13-c590-43d4-8b2a-61e551452778" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row" outputLabel="Score">
+            <semantic:input id="_0013d898-7cb1-4e63-be7c-76299ca1d9d1">
+              <semantic:inputExpression id="_E693DE63-5782-4461-8C18-FD2156C23A0B" typeRef="ContrePartie">
+                <semantic:text>CP.TypeAiguillage</semantic:text>
+              </semantic:inputExpression>
+            </semantic:input>
+            <semantic:input id="_b21242e4-640a-4f69-bb5d-b6e0ed14b4dc">
+              <semantic:inputExpression id="_7B0DF197-9A8D-4495-BE4C-3F6FFCF923A6" typeRef="string">
+                <semantic:text>Var.type</semantic:text>
+              </semantic:inputExpression>
+            </semantic:input>
+            <semantic:input id="_43f2ad55-0698-46c5-9203-7f8b63653554">
+              <semantic:inputExpression id="_EFE9C050-1646-48F1-9C7A-4CE00C10155F" typeRef="number">
+                <semantic:text>Var.valeur</semantic:text>
+              </semantic:inputExpression>
+            </semantic:input>
+            <semantic:output id="_4afe0708-7921-4982-82b1-0381ffe6d118" typeRef="number"/>
+            <semantic:rule id="_0ad9f09b-eac2-4aac-a40b-e1826e89bc26">
+              <semantic:inputEntry id="_e917ab42-0619-45c9-98a1-124f793ebe21">
+                <semantic:text>"MODELE_1"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_c357596f-9cac-49f4-9750-80165de39deb">
+                <semantic:text>"strfin_36"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_bc5111ca-ae9c-4db8-9a46-f50d869a0ece">
+                <semantic:text>&lt; 5</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_414f069a-3b08-4df7-8c3f-b239524ee435">
+                <semantic:text>0.79</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_07557169-1ca4-43ce-837e-bba5eab543c2">
+              <semantic:inputEntry id="_fb121c8d-72c6-4a11-b5d1-4174a5b1c3ce">
+                <semantic:text>"MODELE_1"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_c5ba3f44-a6af-4e53-ac91-0b6e656d1fe3">
+                <semantic:text>"strfin_36"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_a238a74b-3ad2-42e9-90d0-8f371b5670a6">
+                <semantic:text>[5 .. 10)</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_2d8989e0-92d6-46f0-acb3-f9359549f94c">
+                <semantic:text>0.71</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_36851f23-b9b9-4c43-8e7a-2a2626b8fc8e">
+              <semantic:inputEntry id="_3ad1d784-845d-4e9c-95df-dc1c7b1fbb1e">
+                <semantic:text>"MODELE_1"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_ba036840-c3a0-4971-b8ae-716a2d405173">
+                <semantic:text>"strfin_36"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_619f0ce9-79ba-49d6-93a8-2c9b8308172d">
+                <semantic:text>[10 .. 20)</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_4f049401-f98e-4138-b8da-d374250088b3">
+                <semantic:text>0.34</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_3ecda1b2-f1ea-483d-a8d3-8f6eaf18fbd3">
+              <semantic:inputEntry id="_2ddfc108-467e-49cb-849b-bd4cc9567cbc">
+                <semantic:text>"MODELE_1"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_ac873e06-71de-4db3-bdee-9e7291d135a8">
+                <semantic:text>"strfin_36"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_5812f123-b281-4414-8779-eecc11f2582e">
+                <semantic:text>&gt;= 20</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_aa23a8f5-4472-4640-8fe6-6014c47d5a51">
+                <semantic:text>0</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_EAAA20DF-60E0-4290-B041-9123DA351C1E">
+              <semantic:inputEntry id="_44B5A994-FFE7-4E2D-B151-54AB77D8EBDD">
+                <semantic:text>"MODELE_1"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_0D4DA665-C064-4D5C-B600-44514FA97AAF">
+                <semantic:text>"rentab_13"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_EB213DA9-68F4-455A-9D6C-FA781F025F77">
+                <semantic:text>&lt;10</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_15290A22-7C23-4C40-A688-ED24F1099096">
+                <semantic:text>0.26</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_5404D387-8328-408F-AD99-DB3BA3A7DBDF">
+              <semantic:inputEntry id="_F588E219-65D6-4D6C-A00E-EC0A91D619E3">
+                <semantic:text>"MODELE_1"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_FA224181-A765-4780-A5FA-64AC69B229E1">
+                <semantic:text>"rentab_13"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_13B01BB7-4F7C-4D0E-84B7-BE2AA2E68BDC">
+                <semantic:text>[10..15)</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_8B23CA86-F592-438C-9557-C7A824DC48D6">
+                <semantic:text>0</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_57FA55C8-69AE-438B-825C-4687FC800890">
+              <semantic:inputEntry id="_2E88018C-64D0-4BE2-B7F1-81C625F85541">
+                <semantic:text>"MODELE_2"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_B9BB7D75-407E-48A1-8B1B-F54D9F257167">
+                <semantic:text>"strfin_36"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_ADD9B023-7517-4BE4-BD79-747DA2E5E99A">
+                <semantic:text>&lt;2</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_4C32205A-0D47-46A0-8E3E-43D9C2ACD7D0">
+                <semantic:text>1.25</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_7C33D0F6-1153-43B2-8A33-1F9EF5D5187E">
+              <semantic:inputEntry id="_4138A852-6C98-4FEB-981E-BC0E8D6E6C9F">
+                <semantic:text>"MODELE_2"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_509A428D-52C1-44AD-B1E9-1AF5349F973C">
+                <semantic:text>"strfin_36"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_A3154B16-BF72-470C-AF3D-87F98F794EA0">
+                <semantic:text>[2..4)</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_479BA36A-0403-4EEE-BD73-458E23687F5D">
+                <semantic:text>1.13</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_B3191089-9ED9-4486-900E-7C7546294809">
+              <semantic:inputEntry id="_70BBBE3C-BD88-46D2-B491-4695581D5CD6">
+                <semantic:text>"MODELE_2"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_57415068-2841-4AB0-8711-11D2539B6DFD">
+                <semantic:text>"strfin_36"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_70BFA209-48BA-44B1-8953-1770BFFC5301">
+                <semantic:text>[6..8)</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_97283BC5-7C83-42CD-966C-0A24C79DDF23">
+                <semantic:text>0.88</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_AF358327-D01F-41DD-9E9D-D842828D732C">
+              <semantic:inputEntry id="_E06979A8-71CB-4C59-B215-7DD4A5F7A6A9">
+                <semantic:text>"MODELE_2"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_EEC62318-0907-4A12-B3DA-3E25F88BE977">
+                <semantic:text>"strfin_36"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_553782CB-6C60-4D80-A2B5-CE65E1F301F5">
+                <semantic:text>[10..12)</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_7231B2B4-18FB-4933-9826-E3BB7A60DCDB">
+                <semantic:text>0.49</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_E66C7EFB-412C-4334-A3FD-913054E8A6DF">
+              <semantic:inputEntry id="_D257C609-E3CB-44A7-B6FA-367A7D1B7714">
+                <semantic:text>"MODELE_2"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_57714377-6EA3-453C-B3C7-8CD2D13B0376">
+                <semantic:text>"strfin_36"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_D7308918-0BDA-4B2C-8D37-F942899E4F3A">
+                <semantic:text>&gt;12</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_41916540-BC7C-4EA5-8E0D-1C78F8C5A102">
+                <semantic:text>0</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_70707654-E165-42D2-A1D5-63307DB4A9C8">
+              <semantic:inputEntry id="_289889C6-B938-48FB-84D7-C3FD06B5C02C">
+                <semantic:text>"MODELE_2"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_83EB95E1-D1C9-49E8-B75B-5EBA0FFE8DFB">
+                <semantic:text>"rentab_38"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_F443EA15-6C09-45C7-A17B-F5C199E0F8DA">
+                <semantic:text>&lt;-10</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_BCCE24CE-A9C3-4EBC-A26C-558A925C84A4">
+                <semantic:text>0.37</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_3B9CDD6D-1629-4823-9D4E-5D59DAC866A7">
+              <semantic:inputEntry id="_0D503E1F-FCAA-4351-96B2-755891B80ED4">
+                <semantic:text>"MODELE_2"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_D1DA9C9C-F3F5-4B48-9DC2-1DAE591803F9">
+                <semantic:text>"rentab_38"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_AC7EAAE5-79D8-41B3-A310-F3FA0DD36875">
+                <semantic:text>[-10..-5)</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_059CDC92-78EC-4D4C-9B1A-E65A230B6A87">
+                <semantic:text>0.24</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+            <semantic:rule id="_D0F4BE2C-07C7-43F9-8E9D-8E2220E9FB55">
+              <semantic:inputEntry id="_8D635632-201D-4287-8415-8A71473937D2">
+                <semantic:text>"MODELE_2"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_10AD40C3-15DE-49D5-8F61-86E76A69E556">
+                <semantic:text>"rentab_38"</semantic:text>
+              </semantic:inputEntry>
+              <semantic:inputEntry id="_C1A93299-49DA-4250-8605-9C4BC372D546">
+                <semantic:text>[-5..20)</semantic:text>
+              </semantic:inputEntry>
+              <semantic:outputEntry id="_1E72334D-0D1C-4309-A5C1-098C3DBC1030">
+                <semantic:text>0</semantic:text>
+              </semantic:outputEntry>
+            </semantic:rule>
+          </semantic:decisionTable>
+        </semantic:contextEntry>
+        <semantic:contextEntry>
+          <semantic:literalExpression id="_8054d752-c5f7-449e-bb98-13146488570b">
+            <semantic:text>if(Score != null) then Score else 0</semantic:text>
+          </semantic:literalExpression>
+        </semantic:contextEntry>
+      </semantic:context>
+    </semantic:encapsulatedLogic>
+  </semantic:businessKnowledgeModel>
+  <semantic:decision id="_df30a179-726b-4616-bef7-803b8c294fde" name="Notation">
+    <semantic:extensionElements/>
+    <semantic:variable id="_ec350155-387c-442f-af81-9aa354d6e730" name="Notation" typeRef="Any"/>
+    <semantic:informationRequirement id="_b6f1c1b8-55cb-433e-bd0f-8661c5a8b072">
+      <semantic:requiredDecision href="#_e37c914e-bf21-4850-a11d-1af50aa5a01a"/>
+    </semantic:informationRequirement>
+    <semantic:informationRequirement id="_972f5b75-3015-4205-9b0c-fbe0bbdce342">
+      <semantic:requiredDecision href="#_ade4146f-4804-42ad-8274-29fd8fa25e29"/>
+    </semantic:informationRequirement>
+    <semantic:context id="_4ca79806-0d33-4b63-b85f-600569457fc2" typeRef="Any">
+      <semantic:contextEntry>
+        <semantic:variable id="_668e63b6-591c-4525-900d-9ed13e159620" name="Score" typeRef="Any"/>
+        <semantic:literalExpression id="_203488f0-15d9-436a-bfe8-4cbbcf8555e1">
+          <semantic:text>ScoreFinal</semantic:text>
+        </semantic:literalExpression>
+      </semantic:contextEntry>
+      <semantic:contextEntry>
+        <semantic:variable id="_f686d218-46d8-4de9-90e1-f14d2319d632" name="Note" typeRef="string"/>
+        <semantic:decisionTable id="_7fd1e61d-903c-4330-970c-ed14aeb235e7" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row" outputLabel="Note">
+          <semantic:input id="_1a09d3ac-0585-4d15-9662-fec596907a60">
+            <semantic:inputExpression id="_6880B56B-00DA-41D1-A066-40ACA7EF5EF4" typeRef="string">
+              <semantic:text>Score</semantic:text>
+            </semantic:inputExpression>
+          </semantic:input>
+          <semantic:output id="_fc4c597e-847b-450d-8160-06515743b115"/>
+          <semantic:rule id="_0513bb66-11b5-4807-9677-8ae1d329e0f9">
+            <semantic:inputEntry id="_893badaa-a3d1-49a3-9456-06d008aa7a58">
+              <semantic:text>&lt; 0.20</semantic:text>
+            </semantic:inputEntry>
+            <semantic:outputEntry id="_ba2d9928-8ed1-4dc2-9ee9-96494d8e2543">
+              <semantic:text>"A"</semantic:text>
+            </semantic:outputEntry>
+          </semantic:rule>
+          <semantic:rule id="_a75a514c-6aa0-40a0-8cdc-c6fc7ce305e4">
+            <semantic:inputEntry id="_ec3fdb96-7848-4f78-b4c8-b29dcb58569e">
+              <semantic:text>[0.20 .. 0.5)</semantic:text>
+            </semantic:inputEntry>
+            <semantic:outputEntry id="_70b65c76-6f24-4750-8fc1-291320ce78b5">
+              <semantic:text>"B"</semantic:text>
+            </semantic:outputEntry>
+          </semantic:rule>
+          <semantic:rule id="_24294486-f605-41f2-90c6-e007d74abc6a">
+            <semantic:inputEntry id="_a8a88f6f-f746-451f-b6e3-d4a7b32a8aa0">
+              <semantic:text>&gt;= 0.5</semantic:text>
+            </semantic:inputEntry>
+            <semantic:outputEntry id="_dce1a395-95f8-40c9-913f-a04c00376285">
+              <semantic:text>"C"</semantic:text>
+            </semantic:outputEntry>
+          </semantic:rule>
+        </semantic:decisionTable>
+      </semantic:contextEntry>
+      <semantic:contextEntry>
+        <semantic:variable id="_9eba509b-45ff-44cd-aaa3-f0e964841c90" name="Orientation" typeRef="string"/>
+        <semantic:decisionTable id="_61d1961d-c571-4d67-ba50-9ae5938c6b0d" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row" outputLabel="Orientation">
+          <semantic:input id="_526c7576-ff0d-4d8c-9fc2-682e5bd5cf86">
+            <semantic:inputExpression id="_6464FB9B-EB26-4DA1-812E-34822CFA285F" typeRef="string">
+              <semantic:text>Note</semantic:text>
+            </semantic:inputExpression>
+          </semantic:input>
+          <semantic:output id="_61be9807-235a-4f15-b38f-599fb9410100"/>
+          <semantic:rule id="_53c0312c-b22f-4347-9b0e-e19ab6551870">
+            <semantic:inputEntry id="_ac8ee14a-a160-47e2-946a-c68e282c3af4">
+              <semantic:text>"A"</semantic:text>
+            </semantic:inputEntry>
+            <semantic:outputEntry id="_69962909-4311-4a5c-b51a-fbb762233cb3">
+              <semantic:text>"Favorable"</semantic:text>
+            </semantic:outputEntry>
+          </semantic:rule>
+          <semantic:rule id="_8e63d723-050f-4566-b6cf-21c6fe2d9dc1">
+            <semantic:inputEntry id="_0cd636f8-b863-4c72-ac02-881407878988">
+              <semantic:text>"B"</semantic:text>
+            </semantic:inputEntry>
+            <semantic:outputEntry id="_88d280f2-90fe-4121-8fcc-3563fc1e2102">
+              <semantic:text>"Reserve"</semantic:text>
+            </semantic:outputEntry>
+          </semantic:rule>
+          <semantic:rule id="_e4fb97bf-53f5-4875-a4ae-d5f9721c79b1">
+            <semantic:inputEntry id="_25d2204b-695a-4373-9aee-0542bbe60adc">
+              <semantic:text>"C"</semantic:text>
+            </semantic:inputEntry>
+            <semantic:outputEntry id="_fcc9314b-8beb-4bad-a441-60d9b61d2f4e">
+              <semantic:text>"Defavorable"</semantic:text>
+            </semantic:outputEntry>
+          </semantic:rule>
+        </semantic:decisionTable>
+      </semantic:contextEntry>
+      <semantic:contextEntry>
+        <semantic:variable id="_d337ec87-8326-4d89-9027-b9b1d93794dd" name="TypeAiguillage" typeRef="Any"/>
+        <semantic:literalExpression id="_68bd5785-78a9-4b0d-b419-b59fe90d0f7f">
+          <semantic:text>ContrePartie.TypeAiguillage</semantic:text>
+        </semantic:literalExpression>
+      </semantic:contextEntry>
+      <semantic:contextEntry>
+        <semantic:variable id="_0cb3f4d4-e350-4f56-a612-7bba9f96be2f" name="DecoupageSectoriel" typeRef="Any"/>
+        <semantic:literalExpression id="_53938a1c-c8de-4417-86ca-c356e2b092bf">
+          <semantic:text>ContrePartie.DecoupageSectoriel</semantic:text>
+        </semantic:literalExpression>
+      </semantic:contextEntry>
+    </semantic:context>
+  </semantic:decision>
+  <semantic:decision id="_ade4146f-4804-42ad-8274-29fd8fa25e29" name="ContrePartie">
+    <semantic:extensionElements/>
+    <semantic:variable id="_06b8d10c-068a-4b67-9cb8-cf18981a7636" name="ContrePartie" typeRef="Any"/>
+    <semantic:informationRequirement id="_ce7b049b-0787-4893-846e-159eb3c497ef">
+      <semantic:requiredInput href="#_ff48c426-2558-4096-ad64-b09ba1d1db11"/>
+    </semantic:informationRequirement>
+    <semantic:decisionTable id="_ab6ca1e1-ee5b-4bde-92d1-0f2efdfaa637" typeRef="Any" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row" outputLabel="ContrePartie">
+      <semantic:input id="_78f797a5-d302-4efc-b4a7-37fbfdf52ed0">
+        <semantic:inputExpression id="_62C346C3-BEB7-4DED-AFFB-CBCF6FFF0D70" typeRef="string">
+          <semantic:text>CodeNaf</semantic:text>
+        </semantic:inputExpression>
+      </semantic:input>
+      <semantic:output id="_271b874f-2ac4-4679-9f40-c39f418457c5" name="DecoupageSectoriel" typeRef="string"/>
+      <semantic:output id="_d5d15cce-bcd8-4270-85c6-1936b81dc61f" name="TypeAiguillage" typeRef="string"/>
+      <semantic:rule id="_bcaeefd1-0cd7-47b4-91b2-d229f6457972">
+        <semantic:inputEntry id="_b1a69ebb-0822-48cd-97bd-ccab78fa9410">
+          <semantic:text>"5310Z"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_1782cc04-36c0-47e9-b696-30daa7a6d440">
+          <semantic:text>0</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_a43ecb1b-bb9f-4588-b622-253a7b78245f">
+          <semantic:text>"NON_NOTE"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_3a50c5c7-f87a-420b-bcdf-24f9dd66a0f8">
+        <semantic:inputEntry id="_50e1fff2-d5f9-479f-868d-3a50acfc72dd">
+          <semantic:text>"6411Z"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_198e6b90-dc91-449a-8b30-c34f0c2f69bf">
+          <semantic:text>0</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_d1bfc6a5-6046-481b-9522-0d85e37453d8">
+          <semantic:text>"NON_NOTE"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_e89cd833-52a1-4369-9a90-4433771f3939">
+        <semantic:inputEntry id="_02da48a9-9950-4290-bd34-f34b60445e8a">
+          <semantic:text>"6419Z"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_008859f6-fe98-41c8-9f7e-f99331ad175e">
+          <semantic:text>0</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_9a34786b-a9ac-43bf-9f8f-5604a22c6086">
+          <semantic:text>"NON_NOTE"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_594332bd-681f-42d2-b2b3-660b37660626">
+        <semantic:inputEntry id="_20f5e1c5-6d35-4c1b-8665-995d45a96078">
+          <semantic:text>"6430Z"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_b190868b-32ef-4dbc-8db1-15541e1b8b3f">
+          <semantic:text>0</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_374bf95e-b32e-4923-ad21-4071f10460d3">
+          <semantic:text>"NON_NOTE"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_dcad9af0-e27d-47a9-9caf-8e693140ef7c">
+        <semantic:inputEntry id="_827e861d-4eba-4ccc-bc20-5302bcc6be40">
+          <semantic:text>"6491Z"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_148371df-07c1-4df1-82b7-a112bb187d13">
+          <semantic:text>0</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_db82e142-662c-4a44-882b-bd9fd46ecb76">
+          <semantic:text>"NON_NOTE"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_81739e84-a53c-498c-a72c-bd6b8107b5aa">
+        <semantic:inputEntry id="_12e02f91-8dfc-433c-b025-0435acf374d9">
+          <semantic:text>"1011Z"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_2cc9d88d-c08e-4188-b0ad-758a83c53605">
+          <semantic:text>0</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_aed01ab2-7ca9-4b6e-a22a-1b5dd3f63aed">
+          <semantic:text>"NON_NOTE"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_567f5e0e-74ec-4c51-8953-7d9e43253273">
+        <semantic:inputEntry id="_8865ad81-4c36-4a5e-ab13-4ad8d9f70044">
+          <semantic:text>"1012Z"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_1b55ee08-138f-420b-acba-8a299536f8c5">
+          <semantic:text>1</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_0882793b-da95-4fc4-9237-c4c996378bad">
+          <semantic:text>"MODELE_1"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_7693cb83-576b-41e7-956b-14e565190b16">
+        <semantic:inputEntry id="_39f53854-e9fd-4205-b2aa-ccd4f9801724">
+          <semantic:text>"1013A"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_9bf5ebdb-4f63-45cb-9858-1d16a441a4b5">
+          <semantic:text>1</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_e63b4d90-6b3e-4025-9832-f994f3f7e535">
+          <semantic:text>"MODELE_1"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_74ff3406-35c1-485e-a810-93dc97b96218">
+        <semantic:inputEntry id="_b89beb35-fea2-43a6-8fe1-633a282b3758">
+          <semantic:text>"1013B"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_6b65b892-e000-4822-80ed-9a33e135ab9f">
+          <semantic:text>1</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_d9540aeb-f564-4b13-8900-f610686c7cc6">
+          <semantic:text>"MODELE_1"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_2fb65542-b1f3-4bbe-98de-1d5fb16beb49">
+        <semantic:inputEntry id="_f4771743-3a80-43f7-83e7-be601550a9ba">
+          <semantic:text>"1020Z"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_f878bcf9-4c8c-4cc0-9331-20c4f0caa082">
+          <semantic:text>1</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_7e8d43ae-a246-4248-a6ea-23141f54c63b">
+          <semantic:text>"MODELE_1"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_1e8f9a89-7406-4c7e-8da1-06eddd5885d2">
+        <semantic:inputEntry id="_97f8d7a4-1f3f-4db4-b48c-0636f2d536ad">
+          <semantic:text>"4321A"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_6cdcb8b6-6495-405e-af02-ef6da7632a01">
+          <semantic:text>2</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_d4d3c5f5-0f57-4d4e-8f37-8e4f4c77f056">
+          <semantic:text>"MODELE_2"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_827e9804-6d51-496c-bcdb-3307a6cbc187">
+        <semantic:inputEntry id="_7529d878-5356-4357-a4ba-d87021f8985f">
+          <semantic:text>"4321B"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_efc3ee0a-1747-4f6e-b794-c808ed7eed6d">
+          <semantic:text>2</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_63960046-534d-4a2e-80f3-2cc0672aa061">
+          <semantic:text>"MODELE_2"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_666d269a-d4a7-4a0a-99d4-c51c050f3c72">
+        <semantic:inputEntry id="_022e7773-5da7-4423-8594-c166b22f4bca">
+          <semantic:text>"4322A"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_84cdcb60-452c-414a-b25d-378e9743f888">
+          <semantic:text>2</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_1afe5002-235b-4c46-9182-29fdc180a901">
+          <semantic:text>"MODELE_2"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_948897b1-a4a6-4f1c-8dec-ded083e44b01">
+        <semantic:inputEntry id="_8b1b084e-6884-4493-a54a-4186c897666c">
+          <semantic:text>"4322B"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_1ad8a42f-a17e-4855-a090-d22feb3ff7b1">
+          <semantic:text>2</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_864f5103-40bf-48af-994d-e7de30f952cb">
+          <semantic:text>"MODELE_2"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+      <semantic:rule id="_1bf87409-1110-4635-8984-2d88bad16f07">
+        <semantic:inputEntry id="_733468c8-8832-4cc3-bb54-61d00405bc82">
+          <semantic:text>"4329A"</semantic:text>
+        </semantic:inputEntry>
+        <semantic:outputEntry id="_f1ed68d1-b226-4582-8ba7-17788f1f1b51">
+          <semantic:text>2</semantic:text>
+        </semantic:outputEntry>
+        <semantic:outputEntry id="_6ac8edc9-fe7a-413f-a93c-ecafd6d93b65">
+          <semantic:text>"MODELE_2"</semantic:text>
+        </semantic:outputEntry>
+      </semantic:rule>
+    </semantic:decisionTable>
+  </semantic:decision>
+  <semantic:inputData id="_7bfeb614-5730-4170-867f-13834d0c6836" name="Variables">
+    <semantic:extensionElements/>
+    <semantic:variable id="_77f15a9d-3c20-4e57-ae5b-2d1fd34ff4fb" name="Variables" typeRef="Variable"/>
+  </semantic:inputData>
+  <semantic:inputData id="_ff48c426-2558-4096-ad64-b09ba1d1db11" name="CodeNaf">
+    <semantic:extensionElements/>
+    <semantic:variable id="_44712df5-9d4d-4fd4-885c-9097712a2ec3" name="CodeNaf" typeRef="string"/>
+  </semantic:inputData>
+  <semantic:decision id="_e37c914e-bf21-4850-a11d-1af50aa5a01a" name="ScoreFinal">
+    <semantic:extensionElements/>
+    <semantic:variable id="_9ceee677-b296-4805-af9c-47c088e35078" name="ScoreFinal" typeRef="Any"/>
+    <semantic:informationRequirement id="_85145650-d12f-4be2-a7e0-039d1b075022">
+      <semantic:requiredInput href="#_7bfeb614-5730-4170-867f-13834d0c6836"/>
+    </semantic:informationRequirement>
+    <semantic:informationRequirement id="_85af26db-ffa9-4e3f-95d5-036b966681bb">
+      <semantic:requiredDecision href="#_ade4146f-4804-42ad-8274-29fd8fa25e29"/>
+    </semantic:informationRequirement>
+    <semantic:knowledgeRequirement id="_af1d0eaa-0e06-43f1-b55d-66d6e94d80ad">
+      <semantic:requiredKnowledge href="#_61b7e2a2-712a-4d97-9638-5c2fcd8849f2"/>
+    </semantic:knowledgeRequirement>
+    <semantic:literalExpression id="_c576c046-e7e5-4e00-9e94-02b9ae81f6ad" typeRef="Any">
+      <semantic:text>sum(for Variable in Variables return Score(ContrePartie,Variable))</semantic:text>
+    </semantic:literalExpression>
+  </semantic:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <di:extension>
+        <drools:ComponentsWidthsExtension>
+          <drools:ComponentWidths dmnElementRef="_a53e8725-9957-4180-933d-a9d33f691e1a">
+            <drools:width>50.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>1203.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_247b4a13-c590-43d4-8b2a-61e551452778">
+            <drools:width>50.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>312.0</drools:width>
+            <drools:width>521.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_8054d752-c5f7-449e-bb98-13146488570b">
+            <drools:width>1203.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_703469de-1a20-4bb4-a886-09310e930aa5">
+            <drools:width>50.0</drools:width>
+            <drools:width>1373.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_4ca79806-0d33-4b63-b85f-600569457fc2">
+            <drools:width>50.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>370.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_203488f0-15d9-436a-bfe8-4cbbcf8555e1">
+            <drools:width>370.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_7fd1e61d-903c-4330-970c-ed14aeb235e7">
+            <drools:width>50.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>100.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_61d1961d-c571-4d67-ba50-9ae5938c6b0d">
+            <drools:width>50.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>100.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_68bd5785-78a9-4b0d-b419-b59fe90d0f7f">
+            <drools:width>370.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_53938a1c-c8de-4417-86ca-c356e2b092bf">
+            <drools:width>370.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_ab6ca1e1-ee5b-4bde-92d1-0f2efdfaa637">
+            <drools:width>50.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>100.0</drools:width>
+            <drools:width>100.0</drools:width>
+          </drools:ComponentWidths>
+          <drools:ComponentWidths dmnElementRef="_c576c046-e7e5-4e00-9e94-02b9ae81f6ad">
+            <drools:width>826.0</drools:width>
+          </drools:ComponentWidths>
+        </drools:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-_61b7e2a2-712a-4d97-9638-5c2fcd8849f2" dmnElementRef="_61b7e2a2-712a-4d97-9638-5c2fcd8849f2" isCollapsed="false">
+        <dmndi:DMNStyle fontFamily="arial,helvetica,sans-serif" fontSize="11">
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="695.5" y="259" width="153" height="60"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_df30a179-726b-4616-bef7-803b8c294fde" dmnElementRef="_df30a179-726b-4616-bef7-803b8c294fde" isCollapsed="false">
+        <dmndi:DMNStyle fontFamily="arial,helvetica,sans-serif" fontSize="11">
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="175.98225212097168" y="109" width="153" height="60"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_ade4146f-4804-42ad-8274-29fd8fa25e29" dmnElementRef="_ade4146f-4804-42ad-8274-29fd8fa25e29" isCollapsed="false">
+        <dmndi:DMNStyle fontFamily="arial,helvetica,sans-serif" fontSize="11">
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="174.5" y="377" width="153" height="60"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_7bfeb614-5730-4170-867f-13834d0c6836" dmnElementRef="_7bfeb614-5730-4170-867f-13834d0c6836" isCollapsed="false">
+        <dmndi:DMNStyle fontFamily="arial,helvetica,sans-serif" fontSize="11">
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="391.74112606048584" y="534" width="135.48225212097168" height="60"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_ff48c426-2558-4096-ad64-b09ba1d1db11" dmnElementRef="_ff48c426-2558-4096-ad64-b09ba1d1db11" isCollapsed="false">
+        <dmndi:DMNStyle fontFamily="arial,helvetica,sans-serif" fontSize="11">
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="183.25887393951416" y="534" width="135.48225212097168" height="60"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_e37c914e-bf21-4850-a11d-1af50aa5a01a" dmnElementRef="_e37c914e-bf21-4850-a11d-1af50aa5a01a" isCollapsed="false">
+        <dmndi:DMNStyle fontFamily="arial,helvetica,sans-serif" fontSize="11">
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="382.9822521209717" y="259" width="153" height="60"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-_b6f1c1b8-55cb-433e-bd0f-8661c5a8b072" dmnElementRef="_b6f1c1b8-55cb-433e-bd0f-8661c5a8b072">
+        <di:waypoint x="459.4822521209717" y="259"/>
+        <di:waypoint x="252.48225212097168" y="169"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_972f5b75-3015-4205-9b0c-fbe0bbdce342" dmnElementRef="_972f5b75-3015-4205-9b0c-fbe0bbdce342">
+        <di:waypoint x="251" y="377"/>
+        <di:waypoint x="175.98225212097168" y="139"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_ce7b049b-0787-4893-846e-159eb3c497ef" dmnElementRef="_ce7b049b-0787-4893-846e-159eb3c497ef">
+        <di:waypoint x="250.9967565536499" y="534"/>
+        <di:waypoint x="251" y="437"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_85145650-d12f-4be2-a7e0-039d1b075022" dmnElementRef="_85145650-d12f-4be2-a7e0-039d1b075022">
+        <di:waypoint x="459.4790086746216" y="534"/>
+        <di:waypoint x="469.4822521209717" y="319"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_85af26db-ffa9-4e3f-95d5-036b966681bb" dmnElementRef="_85af26db-ffa9-4e3f-95d5-036b966681bb">
+        <di:waypoint x="327.5" y="407"/>
+        <di:waypoint x="459.4822521209717" y="319"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_af1d0eaa-0e06-43f1-b55d-66d6e94d80ad" dmnElementRef="_af1d0eaa-0e06-43f1-b55d-66d6e94d80ad">
+        <di:waypoint x="696.5" y="289"/>
+        <di:waypoint x="535.9822521209717" y="289"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</semantic:definitions>
