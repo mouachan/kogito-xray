@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intelligent Application Showcase: X-ray Process</title>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container" role="main">
+    <div style="background:transparent !important" class="jumbotron">
+        <img src="iap.png" height="150" style="float:left">
+
+        <h2>Intelligent Application Showcase: X-ray Process</h2>
+
+        <p>X-ray images that were evaluated by the AI/ML model with a low confidence score are shown here.</p>
+    </div>
+    <div class="page-header">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Low Confidence X-rays</h1>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <!-- <th>Patient Name</th>
+                        <th>Patient ID</th>
+                        <th>Date of Birth</th>
+                        <th>Date Image Acquired</th> -->
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="content">
+                    <!-- filled using Ajax -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $.ajaxSetup({
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
+        $( function() {
+            $( "#tripBegin" ).datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+            $( "#tripEnd" ).datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+          } );
+        load();
+        initModal();
+    });
+
+    function getWorkItemID(processinstanceid) {
+        $.getJSON("/XrayProcess/" + processinstanceid + "/tasks", function(data) {
+            $.each(data, function (key, val) {
+                // $("#detailsModal").find('.testremove2').text("Workitem ID: " + val.id);
+                // return val.id;
+                $("#detailsModal").data('workItemID', val.id);
+            });
+        });
+    }
+
+    function completeReview() {
+
+        // var processInstanceData = $('#detailsModal').data('processInstanceData');
+        var comments = $('#xray-review-notes').val();
+        var secondOpinion = false;
+        var processInstanceId = $('#detailsModal').data('processInstanceId');
+        var workItemId = $('#detailsModal').data('workItemID');
+
+        if ($('#second-opinion').is(":checked")) {
+            secondOpinion = true;
+        }
+
+        // processInstanceData.comments=comments;
+        // processInstanceData.secondOpinion=secondOpinion;
+        // console.log(JSON.stringify(processInstanceData));
+        // console.log(processInstanceId);
+        // console.log(workItemId);
+
+        var radiologistData = "{ \"comments\": " + "\"" + comments + "\"" + ",\"secondOpinion\": " + secondOpinion + "}";
+
+        console.log(radiologistData);
+        $.post("/XrayProcess/" + processInstanceId + "/Radiologist/" + workItemId + "?phase=complete", radiologistData, function(data, status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+        
+
+        $('#detailsModal').modal('hide');
+    }
+
+    function load() {
+        $("#content").children().remove();
+        $.getJSON("/XrayProcess", function (data) {
+            $.each(data, function (key, val) {
+                $("<tr>" +
+                    // "<td>" + val.patientName + "</td>" +
+                    // "<td>" + val.patientID + "</td>" +
+                    // "<td>" + val.dateOfBirth + "</td>" +
+                    "<td>" + new Date(val.dateAcquired).toLocaleDateString() + "</td>" +
+                    "<td>" +
+                        "<button class='btn btn-primary btn-sm' " +
+                        "data-toggle='modal' " +
+                        "data-target='#detailsModal' " +
+                        // "data-patientname='" + val.patientName + "' " +
+                        // "data-patientid='" + val.patientID + "' " +
+                        "data-processinstanceid='" + val.id + "' " +
+                        "data-imageref='" + val.xrayEvent.key + "' " +
+                        "   <span>Review</span>" +
+                        "</button>&nbsp;" +
+                    "</td>" +
+                "</tr>").appendTo("#content");
+
+                var processInstanceData = val;
+                $("#detailsModal").data('processInstanceData', processInstanceData);
+            });
+            //initCallbacks();
+        });
+    }
+
+    function initModal() {
+
+        $("#detailsModal").on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var action = button.data('action');
+            var id = button.data('id');
+            var imageRef = button.data('imageref');
+            var modal = $(this);
+            var processInstanceId = button.data("processinstanceid");
+            modal.find('.modal-title').text("Review X-ray Image for Patient: " + button.data("patientname"));
+            
+            // modal.find('.testremove').text("Process Instance ID: " + button.data("jsonData"));
+            $("#detailsModal").data('processInstanceId', processInstanceId);
+            getWorkItemID(processInstanceId);
+            // modal.find('.testremove2').text("Workitem ID: " + getWorkItemID(button.data("processinstanceid")));
+
+            modal.find('#xray-review-image-src').attr('src', 'https://rgw-openshift-storage.apps.cluster-2ae6.2ae6.sandbox1343.opentlc.com/xraylab-0001-anonymized/' + imageRef);
+        })
+    }
+</script>
+
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title" id="detailsModalTitle">Details of a travel</h4>
+            </div>
+            <div class="modal-body">
+                <img style="height: 100%;width: 100%;" id="xray-review-image-src" src="">
+                <form onsubmit="return completeReview()">
+                    <div style="padding: 3px">
+                        <label for="xray-review-notes" style="display: block;margin-top: 15px">Notes</label>
+                        <textarea id="xray-review-notes" style="display: block" name="xray-review-notes" rows="4" cols="65"></textarea>
+
+                        <div style="padding: 3px;margin-top: 15px;margin-bottom: 20px;">
+                            <input type="checkbox" id="second-opinion" name="second-opinion">
+                            <label for="second-opinion" >Second Opinion</label><br>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Complete Review">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+<div class="modal fade" id="tasksModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title" id="detailsModalTitle">Details of a travel</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <h1>Tasks</h1>
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Task name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="taskscontent">
+                                    <!-- filled using Ajax -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
